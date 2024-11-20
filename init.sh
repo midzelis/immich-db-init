@@ -4,7 +4,12 @@
 
 # This is most commonly set to the user 'postgres'
 export INIT_POSTGRES_SUPER_USER=${INIT_POSTGRES_SUPER_USER:-postgres}
-export INIT_POSTGRES_PORT=${INIT_POSTGRES_PORT:-5432}
+
+# Strip quotes from port, if any
+port_temp=${INIT_POSTGRES_PORT:-5432}
+port_temp="${port_temp%\"}"
+port_temp="${port_temp#\"}"
+export INIT_POSTGRES_PORT=${port_temp}
 
 if [[ -z "${INIT_POSTGRES_HOST}" ||
     -z "${INIT_POSTGRES_SUPER_PASS}" ||
